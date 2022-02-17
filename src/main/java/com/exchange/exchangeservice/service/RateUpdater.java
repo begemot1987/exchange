@@ -27,8 +27,8 @@ public class RateUpdater {
 		this.mapper = mapper;
 	}
 	
-	@Scheduled(cron = "0/10 * * * * * ", zone = "Europe/Kiev")
-	private void udateRates() {
+	@Scheduled(cron = "0 * * * * * ", zone = "Europe/Kiev")
+	private void udateRate() {
 		List<RateResponseBeen> currentRates = List.of(new RestTemplate()
         		.getForObject(environment.getProperty("user.exchange.rate.path"),
         				RateResponseBeen[].class));

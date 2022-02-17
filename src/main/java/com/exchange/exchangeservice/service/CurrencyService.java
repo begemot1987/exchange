@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.exchange.exchangeservice.entity.Currency;
+import com.exchange.exchangeservice.exception.CurrencyNotFoundException;
 import com.exchange.exchangeservice.repository.CurrencyRepository;
 
 @Service
@@ -29,17 +30,17 @@ public class CurrencyService {
 		return repository.findAll();
 	}
 	
-	public Currency findByCurrencuCode(String currencyCode) {
-		return repository.findByCurrencyCode(currencyCode).orElseThrow();
+	public Currency findByCurrencyCode(String currencyCode) {
+		return repository.findByCurrencyCode(currencyCode).orElseThrow(
+				() -> new CurrencyNotFoundException("Cant find currency with code " + currencyCode));
 	}
 	
 	public BigDecimal exchange(String from, String to) {
-		Currency fromCurrency = repository.findByCurrencyCode(from).orElseThrow();
-		Currency toCurrency = repository.findByCurrencyCode(to).orElseThrow();
+		Currency fromCurrency = repository.findByCurrencyCode(from).orElseThrow(
+				() -> new CurrencyNotFoundException("Can't find currency with code " + from));
+		Currency toCurrency = repository.findByCurrencyCode(to).orElseThrow(
+				() -> new CurrencyNotFoundException("Can't find currency with code " + to));
 		BigDecimal rate = fromCurrency.getRate().divide(toCurrency.getRate(), 10, RoundingMode.HALF_UP);		
 		return rate;
 	}
-	
-	
-	public void updateData() {}
 }

@@ -1,5 +1,6 @@
 package com.exchange.exchangeservice.controller;
 
+import com.exchange.exchangeservice.dto.ExchangeResponseDto;
 import com.exchange.exchangeservice.dto.RateResponseDto;
 import com.exchange.exchangeservice.service.CurrencyService;
 import com.exchange.exchangeservice.service.mapper.CurrencyMapper;
@@ -16,13 +17,23 @@ public class MainController {
 		this.mapper = mapper;
 		this.currencyService = currencyService;
 	}
+	
+	@GetMapping("/")
+	public String test() {
+		return "You are here";
+	}
+	
     @GetMapping("/{code}")
     public RateResponseDto getByCurrencyCode(@PathVariable String code) {
-    	return mapper.currencyToRateResponseDto(currencyService.findByCurrencuCode(code));
+    	return mapper.currencyToRateResponseDto(currencyService.findByCurrencyCode(code));
     }
     
     @GetMapping("/from/{from}/to/{to}")
-    public String exchange(@PathVariable String from, @PathVariable String to) {    	
-    	return "Converting rate from " + from + " to " + to + " is " + currencyService.exchange(from, to);    	
+    public ExchangeResponseDto exchange(@PathVariable String from, @PathVariable String to) {
+    	ExchangeResponseDto response = new ExchangeResponseDto();
+    	response.setFrom(from);
+    	response.setTo(to);
+    	response.setRate(currencyService.exchange(from, to));
+    	return response;
     }
 }
