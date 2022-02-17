@@ -7,13 +7,13 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.exchange.exchangeservice.entity.Currency;
-import com.exchange.exchangeservice.repository.CurrensyRepository;
+import com.exchange.exchangeservice.repository.CurrencyRepository;
 
 @Service
 public class CurrencyService {
-	private final CurrensyRepository repository;
+	private final CurrencyRepository repository;
 	
-	public CurrencyService(CurrensyRepository repository) {
+	public CurrencyService(CurrencyRepository repository) {
 		this.repository = repository;
 	}
 	

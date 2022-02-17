@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.exchange.exchangeservice.been.RateResponseBeen;
-import com.exchange.exchangeservice.repository.CurrensyRepository;
+import com.exchange.exchangeservice.repository.CurrencyRepository;
 import com.exchange.exchangeservice.service.mapper.CurrencyMapper;
 
 @Component
 @EnableScheduling
 public class RateUpdater {
 	private CurrencyMapper mapper;
-	private final CurrensyRepository repository;
+	private final CurrencyRepository repository;
 	private final Environment environment;
 	
-	public RateUpdater(CurrensyRepository repository,
+	public RateUpdater(CurrencyRepository repository,
 			Environment environment, CurrencyMapper mapper) {
 		this.repository = repository;
 		this.environment = environment;
