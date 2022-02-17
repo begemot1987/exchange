@@ -32,12 +32,10 @@ public class MainController {
     public List<RateResponseDto> fetchData() {
         RateResponseBeen[] forEntity = new RestTemplate()
         		.getForObject(environment.getProperty("user.exchange.rate.path"),
-        				RateResponseBeen[].class);
-        
+        				RateResponseBeen[].class);        
         List<Currency> collect = Arrays.stream(forEntity)
         		.map(mapper::rateResponseBeenToCurrency)
         		.collect(Collectors.toList());
-
         return currencyService.saveAll(collect)
         		.stream()
         		.map(mapper::currencyToRateResponseDto)
