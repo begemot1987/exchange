@@ -39,4 +39,7 @@ public class CurrencyService {
 		BigDecimal rate = fromCurrency.getRate().divide(toCurrency.getRate(), 10, RoundingMode.HALF_UP);		
 		return rate;
 	}
+	
+	
+	public void updateData() {}
 }

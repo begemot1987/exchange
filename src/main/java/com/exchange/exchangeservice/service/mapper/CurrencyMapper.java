@@ -13,7 +13,7 @@ public class CurrencyMapper {
 	
 	public Currency rateResponseBeenToCurrency(RateResponseBeen rateResponseBeen) {
 		Currency currency = new Currency();
-		currency.setR030(rateResponseBeen.getR030());
+		currency.setId(Long.valueOf(rateResponseBeen.getR030()));
 		currency.setName(rateResponseBeen.getTxt());
 		currency.setRate(rateResponseBeen.getRate());
 		currency.setCc(rateResponseBeen.getCc());
@@ -23,7 +23,7 @@ public class CurrencyMapper {
 	
 	public RateResponseDto currencyToRateResponseDto(Currency currency) {
 		RateResponseDto response = new RateResponseDto();
-		response.setR030(currency.getR030());
+		response.setR030(currency.getId().intValue());
 		response.setName(currency.getName());
 		response.setRate(currency.getRate());
 		return response;
