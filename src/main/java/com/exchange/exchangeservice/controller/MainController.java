@@ -4,6 +4,8 @@ import com.exchange.exchangeservice.dto.ExchangeResponseDto;
 import com.exchange.exchangeservice.dto.RateResponseDto;
 import com.exchange.exchangeservice.service.CurrencyService;
 import com.exchange.exchangeservice.service.mapper.CurrencyMapper;
+import com.exchange.exchangeservice.service.mapper.MapperWithMapstruct;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 	private CurrencyMapper mapper;
 	private CurrencyService currencyService;
+	private MapperWithMapstruct mapperv2;
 	
-	public MainController(CurrencyMapper mapper, CurrencyService currencyService) {
+	public MainController(CurrencyMapper mapper,
+			CurrencyService currencyService,
+			MapperWithMapstruct mapperv2) {
 		this.mapper = mapper;
 		this.currencyService = currencyService;
+		this.mapperv2 = mapperv2;
 	}
 	
 	@GetMapping("/")
